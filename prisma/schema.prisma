@@ -8,10 +8,11 @@ datasource db {
 }
 
 model Deck {
+  name String @default("deck")
   id        Int     @id @default(autoincrement())
   createdAt    DateTime @default(now())  
   updatedAt  DateTime? 
-  userId String @unique
+  userId String 
   flashcards Flashcard[] 
 }
 
