@@ -1,0 +1,35 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id    String  @id @default(cuid())
+  email String?  @unique
+  name  String?
+  decks Deck[]
+}
+
+model Deck {
+  id        Int     @id @default(autoincrement())
+  createdAt    DateTime @default(now())  
+  updatedAt  DateTime? 
+  userId String
+  user User @relation(fields: [userId], references: [id])
+  flashcards Flashcard[]
+}
+
+model Flashcard {
+  id        Int     @id @default(autoincrement())
+  frontMessage     String
+  backMessage   String
+  difficulty Int @default(1)
+  createdAt    DateTime @default(now())  
+  updatedAt  DateTime? 
+  deckId Int
+  deck Deck @relation(fields: [deckId], references: [id])
+}
