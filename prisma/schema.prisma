@@ -20,7 +20,7 @@ model Deck {
   updatedAt  DateTime? 
   userId String
   user User @relation(fields: [userId], references: [id])
-  flashcards Flashcard[]
+  flashcards Flashcard[] 
 }
 
 model Flashcard {
