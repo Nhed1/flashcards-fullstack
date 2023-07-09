@@ -1,26 +1,43 @@
 "use client";
 
-import { Spinner } from "@chakra-ui/react";
+import { Card, CardHeader, Heading, Spinner, Stack } from "@chakra-ui/react";
 import CreateDeck from "./create-deck";
-import DecksContainer from "./decks-container";
 import { useQuery } from "@tanstack/react-query";
+
+interface Deck {
+  name: string;
+  id: number;
+  createdAt: Date;
+}
 
 export default function Decks() {
   const getDecks = async () => {
-    const decks = await fetch("/api/decks");
-    return decks;
+    const res = await fetch("/api/decks");
+    return res.json();
   };
-  const {
-    data: decks,
-    isLoading,
-    isError,
-  } = useQuery({ queryKey: ["get-decks"], queryFn: getDecks });
+  const { data: decks, isLoading } = useQuery<Deck[]>({
+    queryKey: ["get-decks"],
+    queryFn: getDecks,
+  });
 
-  console.log(decks?.body);
+  console.log(decks);
+
   return (
     <>
       <CreateDeck />
-      {/* {isLoading ? </Spinner> :  */}
+      <Stack spacing="4">
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          decks?.map((deck) => (
+            <Card key={deck.id} maxW="md">
+              <CardHeader>
+                <Heading size="md">{deck.name}</Heading>
+              </CardHeader>
+            </Card>
+          ))
+        )}
+      </Stack>
     </>
   );
 }
