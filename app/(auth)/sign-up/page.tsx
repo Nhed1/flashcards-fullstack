@@ -1,9 +1,10 @@
+import ContainerCenter from "@/components/container-center";
 import { SignUp } from "@clerk/nextjs/app-beta";
 
-export default function Page() {
+export default function SignUpPage() {
   return (
-    <section className="py-24">
+    <ContainerCenter>
       <SignUp />
-    </section>
+    </ContainerCenter>
   );
 }
