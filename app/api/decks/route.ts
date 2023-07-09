@@ -8,11 +8,17 @@ type NextApiRequestWithFormData = NextApiRequest &
   };
 
 export async function GET(req: NextApiRequest, res: NextApiResponse) {
-  const decks = await prisma.deck.findMany();
+  try {
+    const decks = await prisma.deck.findMany();
 
-  if (!decks) return res.status(400).json({ error: "not found" });
+    if (!decks) {
+      return res.status(404).json({ error: "Decks not found" });
+    }
 
-  return res.status(200).json({ decks });
+    return res.status(200).json({ decks });
+  } catch (error) {
+    return res.status(500).json({ error: "Internal server error" });
+  }
 }
 
 export async function POST(
