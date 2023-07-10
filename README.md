@@ -2,7 +2,13 @@ This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next
 
 ## Getting Started
 
-First, run the development server:
+run the docker image:
+
+```bash
+docker run --name {{IMAGE_NAME}} -P -e MYSQL_ROOT_PASSWORD={{PASSWORD}} -d mysql
+```
+
+run the development server:
 
 ```bash
 npm run dev

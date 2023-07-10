@@ -20,8 +20,6 @@ export default function Decks() {
     queryFn: getDecks,
   });
 
-  console.log(decks);
-
   return (
     <>
       <CreateDeck />
