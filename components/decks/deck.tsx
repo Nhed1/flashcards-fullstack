@@ -1,6 +1,13 @@
 "use client";
 
-import { Button, Card, CardHeader, Flex, Heading } from "@chakra-ui/react";
+import {
+  Button,
+  ButtonGroup,
+  Card,
+  CardHeader,
+  Flex,
+  Heading,
+} from "@chakra-ui/react";
 
 interface Deck {
   name: string;
@@ -11,19 +18,15 @@ interface Deck {
 export default function Deck({ deck }: { deck: Deck }) {
   return (
     <Card w="800px" border="1px">
-      <Flex justify="space-between" px="10">
+      <Flex justify="space-between" align="center" px="10">
         <CardHeader>
           <Heading size="md">{deck.name}</Heading>
         </CardHeader>
 
-        <Flex justify="center" align="center" gap="1">
-          <Button colorScheme="cyan" variant="outline">
-            add card
-          </Button>
-          <Button colorScheme="cyan" variant="outline">
-            study card
-          </Button>
-        </Flex>
+        <ButtonGroup variant="solid" colorScheme="cyan" spacing="2">
+          <Button>add card</Button>
+          <Button>study deck</Button>
+        </ButtonGroup>
       </Flex>
     </Card>
   );

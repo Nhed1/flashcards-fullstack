@@ -1,6 +1,6 @@
 "use client";
 
-import { Spinner, Stack } from "@chakra-ui/react";
+import { Button, HStack, Spinner, Stack, VStack } from "@chakra-ui/react";
 
 import { useQuery } from "@tanstack/react-query";
 import Deck from "./deck";
@@ -23,12 +23,16 @@ export default function Decks() {
   });
 
   return (
-    <Stack spacing="4" mt="10">
-      {isLoading ? (
-        <Spinner />
-      ) : (
-        decks?.map((deck) => <Deck key={deck.id} deck={deck} />)
-      )}
-    </Stack>
+    <VStack mt="10" gap="8">
+      <Button variant="solid">add new deck</Button>
+
+      <Stack spacing="4">
+        {isLoading ? (
+          <Spinner />
+        ) : (
+          decks?.map((deck) => <Deck key={deck.id} deck={deck} />)
+        )}
+      </Stack>
+    </VStack>
   );
 }
