@@ -1,9 +1,17 @@
 "use client";
 
-import { Button, HStack, Spinner, Stack, VStack } from "@chakra-ui/react";
+import {
+  Button,
+  Spinner,
+  Stack,
+  VStack,
+  useDisclosure,
+} from "@chakra-ui/react";
 
 import { useQuery } from "@tanstack/react-query";
 import Deck from "./deck";
+import { CreateCardModal } from "../create-card/create-card-modal";
+import { useState } from "react";
 
 export interface Deck {
   name: string;
@@ -22,17 +30,29 @@ export default function Decks() {
     queryFn: getDecks,
   });
 
+  const { isOpen, onOpen, onClose } = useDisclosure();
+  const [deckOpened, setDeckOpened] = useState<Deck | null>(null);
+
   return (
     <VStack mt="10" gap="8">
       <Button variant="solid">add new deck</Button>
-
       <Stack spacing="4">
         {isLoading ? (
           <Spinner />
         ) : (
-          decks?.map((deck) => <Deck key={deck.id} deck={deck} />)
+          decks?.map((deck) => (
+            <Deck
+              key={deck.id}
+              deck={deck}
+              onOpen={() => {
+                onOpen();
+                setDeckOpened(deck);
+              }}
+            />
+          ))
         )}
       </Stack>
+      <CreateCardModal isOpen={isOpen} onClose={onClose} deck={deckOpened} />
     </VStack>
   );
 }

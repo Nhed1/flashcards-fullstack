@@ -8,14 +8,15 @@ import {
   Flex,
   Heading,
 } from "@chakra-ui/react";
+import { Deck } from "./decks";
 
-interface Deck {
-  name: string;
-  id: number;
-  createdAt: Date;
-}
-
-export default function Deck({ deck }: { deck: Deck }) {
+export default function Deck({
+  deck,
+  onOpen,
+}: {
+  deck: Deck;
+  onOpen: () => void;
+}) {
   return (
     <Card w="800px" border="1px">
       <Flex justify="space-between" align="center" px="10">
@@ -24,7 +25,7 @@ export default function Deck({ deck }: { deck: Deck }) {
         </CardHeader>
 
         <ButtonGroup variant="solid" colorScheme="cyan" spacing="2">
-          <Button>add card</Button>
+          <Button onClick={onOpen}>add card</Button>
           <Button>study deck</Button>
         </ButtonGroup>
       </Flex>
