@@ -8,13 +8,13 @@ import {
   Flex,
   Heading,
 } from "@chakra-ui/react";
-import { Deck } from "./decks";
+import { DeckInterface } from "./interfaces/deck.interface";
 
 export default function Deck({
   deck,
   onOpen,
 }: {
-  deck: Deck;
+  deck: DeckInterface;
   onOpen: () => void;
 }) {
   return (

@@ -8,36 +8,22 @@ import {
   useDisclosure,
 } from "@chakra-ui/react";
 
-import { useQuery } from "@tanstack/react-query";
-import Deck from "./deck";
 import { CreateCardModal } from "../create-card/create-card-modal";
 import { useState } from "react";
-
-export interface Deck {
-  name: string;
-  id: number;
-  createdAt: Date;
-}
+import { useGetDecks } from "./hooks/useGetDecks";
+import Deck from "./deck";
+import { DeckInterface } from "./interfaces/deck.interface";
 
 export default function Decks() {
-  const getDecks = async () => {
-    const res = await fetch("/api/decks");
-    return res.json();
-  };
-
-  const { data: decks, isLoading } = useQuery<Deck[]>({
-    queryKey: ["get-decks"],
-    queryFn: getDecks,
-  });
-
   const { isOpen, onOpen, onClose } = useDisclosure();
-  const [deckOpened, setDeckOpened] = useState<Deck | null>(null);
+  const [deckOpened, setDeckOpened] = useState<DeckInterface | null>(null);
+  const { decks, isLoadingDecks } = useGetDecks();
 
   return (
     <VStack mt="10" gap="8">
       <Button variant="solid">add new deck</Button>
       <Stack spacing="4">
-        {isLoading ? (
+        {isLoadingDecks ? (
           <Spinner />
         ) : (
           decks?.map((deck) => (

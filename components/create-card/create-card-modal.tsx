@@ -7,12 +7,12 @@ import {
   ModalHeader,
   ModalOverlay,
 } from "@chakra-ui/react";
-import { Deck } from "../decks/decks";
+import { DeckInterface } from "../decks/interfaces/deck.interface";
 
 interface CreateCardModal {
   isOpen: boolean;
   onClose: () => void;
-  deck: Deck | null;
+  deck: DeckInterface | null;
 }
 
 export function CreateCardModal({
