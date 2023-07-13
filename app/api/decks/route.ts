@@ -7,9 +7,13 @@ type NextApiRequestWithFormData = NextApiRequest &
     files: any[];
   };
 
-export async function GET() {
+export async function GET(req: NextApiRequestWithFormData) {
+  const { userId } = getAuth(req);
+
+  if (!userId) return new Response("Unauthorized", { status: 401 });
+
   try {
-    const decks = await prisma.deck.findMany();
+    const decks = await prisma.deck.findMany({ where: { userId } });
 
     if (!decks || decks.length === 0) {
       return new Response("Decks not found", { status: 404 });
