@@ -1,11 +1,11 @@
-"use client";
-
-import { Button, Flex, Heading } from "@chakra-ui/react";
+import { Flex, Heading } from "@chakra-ui/react";
 import { UserButton } from "@clerk/nextjs";
 
 export default function HomeHeader() {
   return (
     <Flex
+      position="sticky"
+      top="0"
       justify="space-between"
       p="3"
       pr="10"
