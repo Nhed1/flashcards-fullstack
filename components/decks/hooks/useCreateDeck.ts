@@ -1,6 +1,6 @@
 import { useMutation } from "@tanstack/react-query";
 
-export const useCreateDeck = () => {
+export const useCreateDeck = ({ onSuccess }: { onSuccess: () => void }) => {
   const createNewDeck = async (deckName: string) => {
     await fetch("/api/decks", {
       method: "POST",
@@ -13,12 +13,18 @@ export const useCreateDeck = () => {
     });
   };
 
-  const { mutate: createDeck, status } = useMutation({
+  const {
+    mutate: createDeck,
+    status,
+    ...props
+  } = useMutation({
     mutationFn: (deckName: string) => createNewDeck(deckName),
+    onSuccess,
   });
 
   return {
     createDeck,
     status,
+    ...props,
   };
 };

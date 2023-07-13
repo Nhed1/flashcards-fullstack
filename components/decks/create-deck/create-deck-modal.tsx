@@ -11,6 +11,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useCreateDeck } from "../hooks/useCreateDeck";
+import { QueryClient, useQueryClient } from "@tanstack/react-query";
 
 interface CreateDeckModal {
   isOpen: boolean;
@@ -18,8 +19,15 @@ interface CreateDeckModal {
 }
 
 export function CreateDeckModal({ isOpen = false, onClose }: CreateDeckModal) {
+  const queryClient = useQueryClient();
+
   const [deckName, setDeckName] = useState("");
-  const { createDeck, status } = useCreateDeck();
+  const { createDeck, status } = useCreateDeck({
+    onSuccess: () => {
+      onClose();
+      queryClient.invalidateQueries(["get-decks"]);
+    },
+  });
 
   return (
     <Modal isOpen={isOpen} onClose={onClose}>
