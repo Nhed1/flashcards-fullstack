@@ -21,7 +21,7 @@ export function CreateCardModal({
   deck,
 }: CreateCardModal) {
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>Create new card inside {deck?.name}</ModalHeader>

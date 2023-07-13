@@ -30,7 +30,7 @@ export function CreateDeckModal({ isOpen = false, onClose }: CreateDeckModal) {
   });
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose}>
+    <Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
       <ModalContent>
         <ModalHeader>create new deck</ModalHeader>
@@ -43,6 +43,7 @@ export function CreateDeckModal({ isOpen = false, onClose }: CreateDeckModal) {
         </ModalBody>
         <ModalFooter>
           <Button
+            isDisabled={deckName === ""}
             isLoading={status === "loading"}
             loadingText="submitting"
             colorScheme="teal"
