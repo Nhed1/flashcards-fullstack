@@ -5,11 +5,7 @@ interface Flashcard {
   backMessage: string;
 }
 
-export const useCreateFlashcard = ({
-  onSuccess,
-}: {
-  onSuccess: () => void;
-}) => {
+export const useCreateFlashcard = () => {
   const createNewCard = async ({ frontMessage, backMessage }: Flashcard) => {
     await fetch("/api/cards", {
       method: "POST",
@@ -29,7 +25,6 @@ export const useCreateFlashcard = ({
     ...props
   } = useMutation({
     mutationFn: (flashcard: Flashcard) => createNewCard(flashcard),
-    onSuccess,
   });
 
   return {

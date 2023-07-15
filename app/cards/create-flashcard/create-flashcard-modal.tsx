@@ -14,6 +14,7 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import { useState } from "react";
+import { useCreateFlashcard } from "../hooks/use-create-flashcard";
 
 interface CreateCardModal {
   isOpen: boolean;
@@ -29,7 +30,7 @@ export function CreateFlashcardModal({
   const [front, setFront] = useState("");
   const [back, setBack] = useState("");
 
-  useCreateFlashcard;
+  const { createFlashcard, status } = useCreateFlashcard();
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
@@ -59,8 +60,13 @@ export function CreateFlashcardModal({
             loadingText="submitting"
             colorScheme="teal"
             variant="outline"
-            // isLoading={status === "loading"}
-            // onClick={() => createDeck(deckName)}
+            isLoading={status === "loading"}
+            onClick={() =>
+              createFlashcard({
+                frontMessage: front,
+                backMessage: back,
+              })
+            }
           >
             submit
           </Button>
