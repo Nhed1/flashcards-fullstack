@@ -10,8 +10,8 @@ import {
   ModalOverlay,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { useCreateDeck } from "../hooks/useCreateDeck";
-import { QueryClient, useQueryClient } from "@tanstack/react-query";
+import { useCreateDeck } from "../hooks/use-create-deck";
+import { useQueryClient } from "@tanstack/react-query";
 
 interface CreateDeckModal {
   isOpen: boolean;

@@ -1,10 +1,10 @@
 "use client";
 
 import { Spinner, Stack, useDisclosure } from "@chakra-ui/react";
-import { CreateCardModal } from "../../app/cards/create-card/create-card-modal";
 import { useState } from "react";
-import { useGetDecks } from "./hooks/useGetDecks";
+import { useGetDecks } from "./hooks/use-get-decks";
 import { DeckInterface } from "./interfaces/deck.interface";
+import { CreateFlashcardModal } from "../cards/create-flashcard/create-flashcard-modal";
 import Deck from "./deck";
 
 export default function DecksTable() {
@@ -30,7 +30,11 @@ export default function DecksTable() {
           ))
         )}
       </Stack>
-      <CreateCardModal isOpen={isOpen} onClose={onClose} deck={deckOpened} />
+      <CreateFlashcardModal
+        isOpen={isOpen}
+        onClose={onClose}
+        deck={deckOpened}
+      />
     </>
   );
 }
