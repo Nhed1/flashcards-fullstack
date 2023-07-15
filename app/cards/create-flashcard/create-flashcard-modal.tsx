@@ -2,7 +2,6 @@ import { DeckInterface } from "@/app/decks/interfaces/deck.interface";
 import {
   Button,
   Flex,
-  Highlight,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -65,6 +64,7 @@ export function CreateFlashcardModal({
               createFlashcard({
                 frontMessage: front,
                 backMessage: back,
+                deckId: deck!.id,
               })
             }
           >

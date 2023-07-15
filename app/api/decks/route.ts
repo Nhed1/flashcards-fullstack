@@ -1,11 +1,6 @@
 import { prisma } from "../db";
 import { getAuth } from "@clerk/nextjs/server";
-import type { NextApiRequest } from "next";
-
-type NextApiRequestWithFormData = NextApiRequest &
-  Request & {
-    files: any[];
-  };
+import { NextApiRequestWithFormData } from "../(types)/next-api-request-with-form-data";
 
 export async function GET(req: NextApiRequestWithFormData) {
   const { userId } = getAuth(req);
