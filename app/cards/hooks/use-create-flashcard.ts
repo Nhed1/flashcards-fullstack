@@ -8,7 +8,7 @@ interface Flashcard {
 
 export const useCreateFlashcard = () => {
   const createNewCard = async (flashcard: Flashcard) => {
-    await fetch("/api/cards", {
+    await fetch("/api/flashcards", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
