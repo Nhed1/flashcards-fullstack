@@ -1,8 +1,8 @@
 "use client";
 
-import DecksContainer from "@/components/decks/decks-container";
-import HomeHeader from "@/components/home-header";
+import HomeHeader from "@/app/home-header";
 import { Flex } from "@chakra-ui/react";
+import DecksContainer from "./decks/decks-container";
 
 export default function Home() {
   return (

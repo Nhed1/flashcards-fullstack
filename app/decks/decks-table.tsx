@@ -1,7 +1,7 @@
 "use client";
 
 import { Spinner, Stack, useDisclosure } from "@chakra-ui/react";
-import { CreateCardModal } from "../create-card/create-card-modal";
+import { CreateCardModal } from "../../app/cards/create-card/create-card-modal";
 import { useState } from "react";
 import { useGetDecks } from "./hooks/useGetDecks";
 import { DeckInterface } from "./interfaces/deck.interface";
