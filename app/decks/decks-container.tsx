@@ -1,6 +1,6 @@
 "use client";
 
-import { Button, Spinner, VStack, useDisclosure } from "@chakra-ui/react";
+import { Button, VStack, useDisclosure } from "@chakra-ui/react";
 
 import { CreateDeckModal } from "./create-deck/create-deck-modal";
 import DecksTable from "./decks-table";

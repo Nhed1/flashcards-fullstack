@@ -8,17 +8,26 @@ interface Flashcard {
   deckId: number;
 }
 
-export async function GET() {
-  const decks = await prisma.deck.findMany();
+export async function GET(req: NextApiRequestWithFormData) {
+  const { deckId } = req.body;
 
-  return decks;
+  try {
+    const flashcards = await prisma.flashcard.findMany({
+      where: { deckId },
+    });
+
+    if (!flashcards || flashcards.length === 0) {
+      return new Response("Decks not found", { status: 404 });
+    }
+
+    return new Response(JSON.stringify(flashcards));
+  } catch (error) {
+    return new Response("Internal server error", { status: 500 });
+  }
 }
 
 export async function POST(req: NextApiRequestWithFormData) {
-  const { userId } = getAuth(req);
   const flashcard: Flashcard = await req.json();
-
-  if (!userId) return new Response("Unauthorized", { status: 401 });
 
   const newFlashcard = await prisma.flashcard.create({
     data: {
