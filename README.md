@@ -1,40 +1,43 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+## Prerequisites
 
-## Getting Started
+You will need to [install docker](https://www.docker.com/get-started/) on your local machine.
 
-run the docker image:
+If you do not have docker, go here to download and install: <https://www.docker.com/get-started/>
 
-```bash
-docker run --name {{IMAGE_NAME}} -P -e MYSQL_ROOT_PASSWORD={{PASSWORD}} -d mysql
-```
+## Installation
 
-run the development server:
+1. Create a .env file inside the project's root directory.
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+2. Copy and paste variables from `.env.example` into `.env` and complete with your database credentials
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+3. Install NPM packages
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+   ```sh
+   npm i
+   ```
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+4. Generate a version of Prisma Client that is tailored to the models.
 
-## Learn More
+   ```js
+   npx prisma generate
+   ```
 
-To learn more about Next.js, take a look at the following resources:
+5. Open Docker Desktop Application and go back to your VSCode terminal and run this command:
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+   ```sh
+   docker compose up -d
+   ```
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+6. Once your database is ready, push your prisma schema to the database.
 
-## Deploy on Vercel
+   ```sh
+   npx prisma db push
+   ```
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+7. Finally start your dev server.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+   ```sh
+   npm run dev
+   ```
+
+Open your browser and visit <http://localhost:3000> to see the application running.
