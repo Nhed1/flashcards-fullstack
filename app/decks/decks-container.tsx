@@ -1,9 +1,11 @@
 "use client";
 
-import { Button, VStack, useDisclosure } from "@chakra-ui/react";
+import { Button, Spinner, VStack, useDisclosure } from "@chakra-ui/react";
 
 import { CreateDeckModal } from "./create-deck/create-deck-modal";
 import DecksTable from "./decks-table";
+import { ErrorBoundary } from "react-error-boundary";
+import Error from "./error";
 
 export default function DecksContainer() {
   const { isOpen, onOpen, onClose } = useDisclosure();
@@ -13,7 +15,9 @@ export default function DecksContainer() {
       <Button variant="solid" onClick={onOpen}>
         add new deck
       </Button>
-      <DecksTable />
+      <ErrorBoundary fallback={<Error />}>
+        <DecksTable />
+      </ErrorBoundary>
       <CreateDeckModal isOpen={isOpen} onClose={onClose} />
     </VStack>
   );

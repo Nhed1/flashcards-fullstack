@@ -7,7 +7,11 @@ export const useGetDecks = () => {
     return res.json();
   };
 
-  const { data: decks, isLoading: isLoadingDecks } = useQuery<DeckInterface[]>({
+  const {
+    data: decks,
+    isLoading: isLoadingDecks,
+    isError,
+  } = useQuery<DeckInterface[]>({
     queryKey: ["get-decks"],
     queryFn: getDecks,
   });
@@ -15,5 +19,6 @@ export const useGetDecks = () => {
   return {
     decks,
     isLoadingDecks,
+    isError,
   };
 };

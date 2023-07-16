@@ -8,9 +8,11 @@ import { CreateFlashcardModal } from "../cards/create-flashcard/create-flashcard
 import Deck from "./deck";
 
 export default function DecksTable() {
-  const { decks, isLoadingDecks } = useGetDecks();
+  const { decks, isLoadingDecks, isError } = useGetDecks();
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [deckOpened, setDeckOpened] = useState<DeckInterface | null>(null);
+
+  if (isError) throw new Error("decks not found");
 
   return (
     <>
