@@ -1,0 +1,19 @@
+version: "3.9"
+services:
+  flashcards-db:
+    image: mysql
+    restart: always
+    container_name: flashcards-mysql
+    ports:
+      - 3307:3306
+    env_file:
+      - .env
+    environment:
+      - DATABASE_URL=${DATABASE_URL}
+      - MYSQL_ROOT_PASSWORD=${MYSQL_ROOT_PASSWORD}
+      - MYSQL_ALLOW_EMPTY_PASSWORD=
+    volumes:
+      - mysql:/var/lib/mysql
+
+volumes:
+  mysql:
