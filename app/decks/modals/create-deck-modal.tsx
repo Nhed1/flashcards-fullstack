@@ -10,7 +10,7 @@ import {
   ModalOverlay,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { useCreateDeck } from "../hooks/use-create-deck";
+import { useCreateDeck } from "./hooks/use-create-deck";
 import { useQueryClient } from "@tanstack/react-query";
 
 interface CreateDeckModal {
