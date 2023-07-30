@@ -13,7 +13,7 @@ import {
   Textarea,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { useCreateFlashcard } from "../hooks/use-create-flashcard";
+import { useCreateFlashcard } from "./hooks/use-create-flashcard";
 
 interface CreateCardModal {
   isOpen: boolean;

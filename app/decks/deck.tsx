@@ -9,13 +9,14 @@ import {
   Heading,
 } from "@chakra-ui/react";
 import { DeckInterface } from "./interfaces/deck.interface";
+import { IModalType } from "./decks-table";
 
 export default function Deck({
   deck,
   onOpen,
 }: {
   deck: DeckInterface;
-  onOpen: () => void;
+  onOpen: (type: IModalType) => void;
 }) {
   return (
     <Card w="800px" border="1px">
@@ -25,8 +26,8 @@ export default function Deck({
         </CardHeader>
 
         <ButtonGroup variant="solid" colorScheme="cyan" spacing="2">
-          <Button onClick={onOpen}>add card</Button>
-          <Button>study deck</Button>
+          <Button onClick={() => onOpen("addCard")}>add card</Button>
+          <Button onClick={() => onOpen("studyCard")}>study deck</Button>
         </ButtonGroup>
       </Flex>
     </Card>
