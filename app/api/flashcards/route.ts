@@ -29,7 +29,7 @@ export async function GET(req: NextApiRequestWithFormData) {
 
   const flashcards = await prisma.flashcard.findMany({
     where: {
-      id: Number(deckId),
+      deckId: Number(deckId),
     },
   });
 

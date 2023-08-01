@@ -1,6 +1,7 @@
 import { DeckInterface } from "@/app/decks/interfaces/deck.interface";
 import {
   Button,
+  Flex,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -9,8 +10,10 @@ import {
   ModalHeader,
   ModalOverlay,
   Text,
+  Spinner,
 } from "@chakra-ui/react";
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
+import { useGetFlashcards } from "./hooks/use-get-flashcards";
 
 interface CreateCardModal {
   isOpen: boolean;
@@ -23,32 +26,53 @@ export function StudyFlashcardModal({
   onClose,
   deck,
 }: CreateCardModal) {
-  const handleFlashcards = async () => {
-    const params = new URLSearchParams();
+  const {
+    flashcards = [],
+    isError,
+    isLoadingFlashcards,
+  } = useGetFlashcards(deck);
+  const [count, setCount] = useState(0);
 
-    if (deck?.id) {
-      params.append("deckId", String(deck?.id));
-    }
+  const allFlashcardsStudied = count === flashcards?.length;
 
-    const res = await fetch(`/api/flashcards?${params}`);
-
-    return res.json();
+  const handleCount = () => {
+    if (allFlashcardsStudied) return;
+    setCount((count) => count + 1);
   };
 
   return (
-    <Modal isOpen={isOpen} onClose={onClose} isCentered>
+    <Modal
+      isOpen={isOpen}
+      onClose={() => {
+        setCount(0);
+        onClose();
+      }}
+      isCentered
+    >
       <ModalOverlay />
-      <ModalContent>
-        <ModalHeader>
-          <Text display="flex" gap="8px">
-            study card
-          </Text>
-          <Button onClick={handleFlashcards}>teset</Button>
-        </ModalHeader>
-        <ModalCloseButton />
-        <ModalBody></ModalBody>
-        <ModalFooter></ModalFooter>
-      </ModalContent>
+      {isLoadingFlashcards && <Spinner />}
+      {!isLoadingFlashcards && flashcards.length > 0 && (
+        <ModalContent>
+          <ModalHeader>
+            <Text display="flex" gap="8px">
+              Study deck {deck?.name}
+            </Text>
+          </ModalHeader>
+          <ModalCloseButton />
+          <ModalBody>
+            {allFlashcardsStudied && <Text>No more flashcards to study</Text>}
+            <Flex flexDirection="column" gap="18px">
+              <Text>{flashcards[count]?.frontMessage}</Text>
+              <Text>{flashcards[count]?.backMessage}</Text>
+            </Flex>
+          </ModalBody>
+          <ModalFooter>
+            {!allFlashcardsStudied && (
+              <Button onClick={handleCount}>Next flashcard</Button>
+            )}
+          </ModalFooter>
+        </ModalContent>
+      )}
     </Modal>
   );
 }
