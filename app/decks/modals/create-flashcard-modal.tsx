@@ -44,10 +44,12 @@ export function CreateFlashcardModal({
         <ModalBody>
           <Flex flexDirection="column" gap="18px">
             <Textarea
+              value={front}
               placeholder="front card"
               onChange={(e) => setFront(e.target.value)}
             />
             <Textarea
+              value={back}
               placeholder="back card"
               onChange={(e) => setBack(e.target.value)}
             />
@@ -60,13 +62,15 @@ export function CreateFlashcardModal({
             colorScheme="teal"
             variant="outline"
             isLoading={status === "loading"}
-            onClick={() =>
+            onClick={() => {
+              setFront("");
+              setBack("");
               createFlashcard({
                 frontMessage: front,
                 backMessage: back,
                 deckId: deck!.id,
-              })
-            }
+              });
+            }}
           >
             submit
           </Button>
