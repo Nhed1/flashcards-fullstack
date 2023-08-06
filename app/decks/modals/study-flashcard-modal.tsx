@@ -35,6 +35,7 @@ export function StudyFlashcardModal({
   const [isAnswerShowingUp, setIsAnswerShowingUp] = useState(false);
 
   const allFlashcardsStudied = count === flashcards?.length;
+  console.log(allFlashcardsStudied);
 
   const handleCount = () => {
     if (allFlashcardsStudied) return;
@@ -53,7 +54,7 @@ export function StudyFlashcardModal({
     >
       <ModalOverlay />
       {isLoadingFlashcards && <Spinner />}
-      {!isLoadingFlashcards && flashcards.length > 0 && (
+      {!isLoadingFlashcards && (
         <ModalContent>
           <ModalHeader>
             <Text display="flex" gap="8px">
