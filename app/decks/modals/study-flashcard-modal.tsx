@@ -11,9 +11,12 @@ import {
   ModalOverlay,
   Text,
   Spinner,
+  Stack,
+  VStack,
 } from "@chakra-ui/react";
 import { useEffect, useState } from "react";
 import { useGetFlashcards } from "./hooks/use-get-flashcards";
+import { DifficultyFlashcard } from "./components/difficulty-flashcard";
 
 interface CreateCardModal {
   isOpen: boolean;
@@ -41,6 +44,8 @@ export function StudyFlashcardModal({
     if (allFlashcardsStudied) return;
     setCount((count) => count + 1);
   };
+
+  const [difficulty, setDifficulty] = useState("1");
 
   return (
     <Modal
@@ -78,19 +83,33 @@ export function StudyFlashcardModal({
               <Text display={isAnswerShowingUp ? "block" : "none"}>
                 {flashcards[count]?.backMessage}
               </Text>
+
+              {isAnswerShowingUp && (
+                <DifficultyFlashcard
+                  setDifficulty={setDifficulty}
+                  difficulty={difficulty}
+                />
+              )}
             </Flex>
           </ModalBody>
           <ModalFooter>
-            {!allFlashcardsStudied && (
-              <Button
-                onClick={() => {
-                  handleCount();
-                  setIsAnswerShowingUp(false);
-                }}
-              >
-                Next flashcard
-              </Button>
-            )}
+            <Flex
+              justifyContent="center"
+              alignItems="center"
+              flexDirection="column"
+            >
+              {!allFlashcardsStudied && (
+                <Button
+                  isDisabled={!isAnswerShowingUp}
+                  onClick={() => {
+                    handleCount();
+                    setIsAnswerShowingUp(false);
+                  }}
+                >
+                  Next flashcard
+                </Button>
+              )}
+            </Flex>
           </ModalFooter>
         </ModalContent>
       )}
