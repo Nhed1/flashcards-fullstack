@@ -3,7 +3,6 @@ import {
   Button,
   Flex,
   Modal,
-  ModalBody,
   ModalCloseButton,
   ModalContent,
   ModalFooter,
@@ -11,12 +10,10 @@ import {
   ModalOverlay,
   Text,
   Spinner,
-  Stack,
-  VStack,
 } from "@chakra-ui/react";
-import { useEffect, useState } from "react";
-import { useGetFlashcards } from "./hooks/use-get-flashcards";
-import { DifficultyFlashcard } from "./components/difficulty-flashcard";
+import { useState } from "react";
+import { useGetFlashcards } from "../hooks/use-get-flashcards";
+import { FlashcardBody } from "./flashcard-body";
 
 interface CreateCardModal {
   isOpen: boolean;
@@ -29,26 +26,20 @@ export function StudyFlashcardModal({
   onClose,
   deck,
 }: CreateCardModal) {
-  const {
-    flashcards = [],
-    isError,
-    isLoadingFlashcards,
-  } = useGetFlashcards(deck);
-  const [count, setCount] = useState(0);
+  const { flashcards = [], isLoadingFlashcards } = useGetFlashcards(deck);
   const [isAnswerShowingUp, setIsAnswerShowingUp] = useState(false);
-
-  const allFlashcardsStudied = count === flashcards?.length;
-  console.log(allFlashcardsStudied);
+  const [count, setCount] = useState(0);
 
   const handleCount = () => {
     if (allFlashcardsStudied) return;
     setCount((count) => count + 1);
   };
 
-  const [difficulty, setDifficulty] = useState("1");
+  const allFlashcardsStudied = count === flashcards?.length;
 
   return (
     <Modal
+      size="md"
       isOpen={isOpen}
       onClose={() => {
         setCount(0);
@@ -67,31 +58,13 @@ export function StudyFlashcardModal({
             </Text>
           </ModalHeader>
           <ModalCloseButton />
-          <ModalBody>
-            {allFlashcardsStudied && <Text>No more flashcards to study</Text>}
-            <Flex flexDirection="column" gap="18px">
-              <Text>{flashcards[count]?.frontMessage}</Text>
-
-              <Button
-                display={
-                  isAnswerShowingUp || allFlashcardsStudied ? "none" : "block"
-                }
-                onClick={() => setIsAnswerShowingUp(true)}
-              >
-                show answer
-              </Button>
-              <Text display={isAnswerShowingUp ? "block" : "none"}>
-                {flashcards[count]?.backMessage}
-              </Text>
-
-              {isAnswerShowingUp && (
-                <DifficultyFlashcard
-                  setDifficulty={setDifficulty}
-                  difficulty={difficulty}
-                />
-              )}
-            </Flex>
-          </ModalBody>
+          <FlashcardBody
+            allFlashcardsStudied={allFlashcardsStudied}
+            count={count}
+            flashcards={flashcards}
+            isAnswerShowingUp={isAnswerShowingUp}
+            setIsAnswerShowingUp={setIsAnswerShowingUp}
+          />
           <ModalFooter>
             <Flex
               justifyContent="center"

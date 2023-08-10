@@ -1,5 +1,4 @@
 import { Radio, RadioGroup, Stack, Text, VStack } from "@chakra-ui/react";
-import { useState } from "react";
 
 interface IDifficulty {
   setDifficulty: (value: string) => void;

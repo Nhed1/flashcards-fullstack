@@ -6,7 +6,7 @@ import { useGetDecks } from "./hooks/use-get-decks";
 import { DeckInterface } from "./interfaces/deck.interface";
 import { CreateFlashcardModal } from "./modals/create-flashcard-modal";
 import Deck from "./deck";
-import { StudyFlashcardModal } from "./modals/study-flashcard-modal";
+import { StudyFlashcardModal } from "./modals/study-flashcard-modal/study-flashcard-modal";
 
 export type IModalType = "addCard" | "studyCard";
 
