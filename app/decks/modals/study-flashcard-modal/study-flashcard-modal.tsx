@@ -14,6 +14,7 @@ import {
 import { useState } from "react";
 import { useGetFlashcards } from "../hooks/use-get-flashcards";
 import { FlashcardBody } from "./flashcard-body";
+import { useUpdateFlashcard } from "../hooks/use-update-flashcard";
 
 interface CreateCardModal {
   isOpen: boolean;
@@ -29,6 +30,7 @@ export function StudyFlashcardModal({
   const { flashcards = [], isLoadingFlashcards } = useGetFlashcards(deck);
   const [isAnswerShowingUp, setIsAnswerShowingUp] = useState(false);
   const [count, setCount] = useState(0);
+  const [difficulty, setDifficulty] = useState("1");
 
   const handleCount = () => {
     if (allFlashcardsStudied) return;
@@ -36,6 +38,8 @@ export function StudyFlashcardModal({
   };
 
   const allFlashcardsStudied = count === flashcards?.length;
+
+  const { updateFlashcard, isLoadingFlashcardUpdate } = useUpdateFlashcard();
 
   return (
     <Modal
@@ -59,6 +63,8 @@ export function StudyFlashcardModal({
           </ModalHeader>
           <ModalCloseButton />
           <FlashcardBody
+            difficulty={difficulty}
+            setDifficulty={setDifficulty}
             allFlashcardsStudied={allFlashcardsStudied}
             count={count}
             flashcards={flashcards}
@@ -75,6 +81,10 @@ export function StudyFlashcardModal({
                 <Button
                   isDisabled={!isAnswerShowingUp}
                   onClick={() => {
+                    updateFlashcard({
+                      ...flashcards[count],
+                      difficulty,
+                    });
                     handleCount();
                     setIsAnswerShowingUp(false);
                   }}

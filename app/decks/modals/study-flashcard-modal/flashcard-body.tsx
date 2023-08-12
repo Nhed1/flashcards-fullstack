@@ -11,17 +11,19 @@ interface FlashcardBody {
   isAnswerShowingUp: boolean;
   count: number;
   setIsAnswerShowingUp: (value: boolean) => void;
+  setDifficulty: (value: string) => void;
+  difficulty: string;
 }
 
 export function FlashcardBody({
+  difficulty,
+  setDifficulty,
   allFlashcardsStudied,
   flashcards,
   isAnswerShowingUp,
   setIsAnswerShowingUp,
   count,
 }: FlashcardBody) {
-  const [difficulty, setDifficulty] = useState("1");
-
   return (
     <ModalBody>
       {allFlashcardsStudied && <Text>No more flashcards to study</Text>}

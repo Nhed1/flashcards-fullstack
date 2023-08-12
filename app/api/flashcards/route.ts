@@ -6,6 +6,7 @@ interface Flashcard {
   frontMessage: string;
   backMessage: string;
   deckId: number;
+  difficulty: string;
 }
 
 export async function POST(req: NextApiRequestWithFormData) {
