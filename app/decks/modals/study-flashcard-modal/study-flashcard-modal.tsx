@@ -12,9 +12,9 @@ import {
   Spinner,
 } from "@chakra-ui/react";
 import { useState } from "react";
-import { useGetFlashcards } from "../hooks/use-get-flashcards";
 import { FlashcardBody } from "./flashcard-body";
-import { useUpdateFlashcard } from "../hooks/use-update-flashcard";
+
+import { useGetFlashcards, useUpdateFlashcard } from "./hooks";
 
 interface CreateCardModal {
   isOpen: boolean;

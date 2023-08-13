@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { DeckInterface } from "../../interfaces/deck.interface";
+import { DeckInterface } from "../../../interfaces/deck.interface";
 
 interface Flashcard {
   frontMessage: string;

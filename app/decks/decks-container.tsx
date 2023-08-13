@@ -2,7 +2,7 @@
 
 import { Button, VStack, useDisclosure } from "@chakra-ui/react";
 
-import { CreateDeckModal } from "./modals/create-deck-modal";
+import { CreateDeckModal } from "./modals/create-deck-modal/create-deck-modal";
 import DecksTable from "./decks-table";
 import { ErrorBoundary } from "react-error-boundary";
 import Error from "./error";

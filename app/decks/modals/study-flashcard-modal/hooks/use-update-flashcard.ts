@@ -7,12 +7,6 @@ interface FlashcardInterface {
 
 export const useUpdateFlashcard = () => {
   const handleFlashcards = async (flashcard: FlashcardInterface) => {
-    const params = new URLSearchParams();
-
-    if (flashcard?.id) {
-      params.append("flashcardId", String(flashcard?.id));
-    }
-
     const res = await fetch(`/api/flashcards/${flashcard?.id}`, {
       method: "PUT",
       body: JSON.stringify({
