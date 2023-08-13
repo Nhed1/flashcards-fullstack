@@ -34,7 +34,6 @@ export async function PUT(
   const id = Number(params.id);
   const difficulty = Number(flashcard.difficulty);
 
-  console.log(params);
   try {
     const flashcard = await prisma.flashcard.update({
       where: { id },
