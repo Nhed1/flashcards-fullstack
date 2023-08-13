@@ -1,34 +1,23 @@
 import { Button, Flex, ModalBody, Text } from "@chakra-ui/react";
-import { useState } from "react";
 import { DifficultyFlashcard } from "./difficulty-flashcard";
+import { useStudyFlashcardsContext } from "./providers/flashcards-provider";
 
-interface FlashcardBody {
-  allFlashcardsStudied: boolean;
-  flashcards: {
-    frontMessage: string;
-    backMessage: string;
-  }[];
-  isAnswerShowingUp: boolean;
-  count: number;
-  setIsAnswerShowingUp: (value: boolean) => void;
-  setDifficulty: (value: string) => void;
-  difficulty: string;
-}
+export function FlashcardBody() {
+  const {
+    allFlashcardsStudied,
+    flashcards,
+    flashcardsCount,
+    isAnswerShowingUp,
+    setIsAnswerShowingUp,
+    difficulty,
+    setDifficulty,
+  } = useStudyFlashcardsContext();
 
-export function FlashcardBody({
-  difficulty,
-  setDifficulty,
-  allFlashcardsStudied,
-  flashcards,
-  isAnswerShowingUp,
-  setIsAnswerShowingUp,
-  count,
-}: FlashcardBody) {
   return (
     <ModalBody>
       {allFlashcardsStudied && <Text>No more flashcards to study</Text>}
       <Flex flexDirection="column" gap="18px">
-        <Text>{flashcards[count]?.frontMessage}</Text>
+        <Text>{flashcards[flashcardsCount]?.frontMessage}</Text>
 
         <Button
           display={isAnswerShowingUp || allFlashcardsStudied ? "none" : "block"}
@@ -37,7 +26,7 @@ export function FlashcardBody({
           show answer
         </Button>
         <Text display={isAnswerShowingUp ? "block" : "none"}>
-          {flashcards[count]?.backMessage}
+          {flashcards[flashcardsCount]?.backMessage}
         </Text>
 
         {isAnswerShowingUp && (

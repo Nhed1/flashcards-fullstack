@@ -1,1 +1,1 @@
-export * from "./study-flashcard-modal";
+export * from "./study-flashcard-container";

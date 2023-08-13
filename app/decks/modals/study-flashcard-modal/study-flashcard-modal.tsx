@@ -11,10 +11,10 @@ import {
   Text,
   Spinner,
 } from "@chakra-ui/react";
-import { useState } from "react";
 import { FlashcardBody } from "./flashcard-body";
 
-import { useGetFlashcards, useUpdateFlashcard } from "./hooks";
+import { useUpdateFlashcard } from "./hooks";
+import { useStudyFlashcardsContext } from "./providers/flashcards-provider";
 
 interface CreateCardModal {
   isOpen: boolean;
@@ -27,26 +27,24 @@ export function StudyFlashcardModal({
   onClose,
   deck,
 }: CreateCardModal) {
-  const { flashcards = [], isLoadingFlashcards } = useGetFlashcards(deck);
-  const [isAnswerShowingUp, setIsAnswerShowingUp] = useState(false);
-  const [count, setCount] = useState(0);
-  const [difficulty, setDifficulty] = useState("1");
-
-  const handleCount = () => {
-    if (allFlashcardsStudied) return;
-    setCount((count) => count + 1);
-  };
-
-  const allFlashcardsStudied = count === flashcards?.length;
+  const {
+    allFlashcardsStudied,
+    isLoadingFlashcards,
+    isAnswerShowingUp,
+    handleFlashcardsCount,
+    setIsAnswerShowingUp,
+    flashcards,
+    difficulty,
+    flashcardsCount,
+  } = useStudyFlashcardsContext();
 
   const { updateFlashcard, isLoadingFlashcardUpdate } = useUpdateFlashcard();
-
   return (
     <Modal
       size="md"
       isOpen={isOpen}
       onClose={() => {
-        setCount(0);
+        handleFlashcardsCount(0);
         onClose();
         setIsAnswerShowingUp(false);
       }}
@@ -62,15 +60,7 @@ export function StudyFlashcardModal({
             </Text>
           </ModalHeader>
           <ModalCloseButton />
-          <FlashcardBody
-            difficulty={difficulty}
-            setDifficulty={setDifficulty}
-            allFlashcardsStudied={allFlashcardsStudied}
-            count={count}
-            flashcards={flashcards}
-            isAnswerShowingUp={isAnswerShowingUp}
-            setIsAnswerShowingUp={setIsAnswerShowingUp}
-          />
+          <FlashcardBody />
           <ModalFooter>
             <Flex
               justifyContent="center"
@@ -82,10 +72,10 @@ export function StudyFlashcardModal({
                   isDisabled={!isAnswerShowingUp}
                   onClick={() => {
                     updateFlashcard({
-                      ...flashcards[count],
+                      ...flashcards[flashcardsCount],
                       difficulty,
                     });
-                    handleCount();
+                    handleFlashcardsCount();
                     setIsAnswerShowingUp(false);
                   }}
                 >
