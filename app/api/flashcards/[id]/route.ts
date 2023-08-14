@@ -39,6 +39,7 @@ export async function PUT(
       where: { id },
       data: {
         difficulty,
+        updatedAt: new Date(),
       },
     });
 

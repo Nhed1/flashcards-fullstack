@@ -1,13 +1,7 @@
 import { prisma } from "../db";
 import { NextApiRequestWithFormData } from "../(types)/next-api-request-with-form-data";
-import {} from "next/server";
-
-interface Flashcard {
-  frontMessage: string;
-  backMessage: string;
-  deckId: number;
-  difficulty: string;
-}
+import { Flashcard } from "./(types)";
+import { filterFlashcardsByDifficulty } from "./(utils)/filterFlashcardsByDifficulty";
 
 export async function POST(req: NextApiRequestWithFormData) {
   const flashcard: Flashcard = await req.json();
@@ -34,5 +28,8 @@ export async function GET(req: NextApiRequestWithFormData) {
     },
   });
 
-  return new Response(JSON.stringify(flashcards));
+  const flashcardsFilteredByDifficulty =
+    filterFlashcardsByDifficulty(flashcards);
+
+  return new Response(JSON.stringify(flashcardsFilteredByDifficulty));
 }

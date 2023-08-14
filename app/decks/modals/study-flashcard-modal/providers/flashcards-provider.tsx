@@ -39,13 +39,16 @@ export function StudyFlashcardsProvider({
   const [flashcardsCount, setFlashcardsCount] = useState(0);
   const [difficulty, setDifficulty] = useState("1");
 
+  const allFlashcardsStudied =
+    flashcardsCount === flashcards?.length || flashcards.length === 0;
+
   const handleFlashcardsCount = (value?: number) => {
-    if (allFlashcardsStudied) return;
-    if (!!value || value === 0) setFlashcardsCount(value);
+    if (value === 0) setFlashcardsCount(value);
+    else if (allFlashcardsStudied) return;
     else setFlashcardsCount((flashcardsCount) => flashcardsCount + 1);
   };
 
-  const allFlashcardsStudied = flashcardsCount === flashcards?.length;
+  console.log(flashcardsCount);
 
   const contextValue: StudyFlashcardsData = {
     difficulty,
