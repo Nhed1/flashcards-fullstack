@@ -13,7 +13,7 @@ export default function DecksContainer() {
   return (
     <VStack mt="10" gap="8" h="100%">
       <Button variant="outline" colorScheme="purple" onClick={onOpen}>
-        add new deck
+        create deck
       </Button>
       <ErrorBoundary fallback={<Error />}>
         <DecksTable />

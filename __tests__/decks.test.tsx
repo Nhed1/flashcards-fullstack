@@ -13,12 +13,12 @@ describe("decks", () => {
     );
 
     const createDeckButton = screen.getByRole("button", {
-      name: "add new deck",
+      name: "create deck",
     });
 
     fireEvent.click(createDeckButton);
 
-    const modalCreateDeck = screen.getByText("create new deck");
+    const modalCreateDeck = screen.getByText("create deck");
 
     expect(modalCreateDeck).toBeInTheDocument();
   });
