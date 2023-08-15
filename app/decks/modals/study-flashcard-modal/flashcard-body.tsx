@@ -1,6 +1,8 @@
 import { Button, Flex, ModalBody, Text } from "@chakra-ui/react";
 import { DifficultyFlashcard } from "./difficulty-flashcard";
 import { useStudyFlashcardsContext } from "./providers/flashcards-provider";
+import { useSpeechSynthesis } from "react-speech-kit";
+import { BsFillVolumeUpFill } from "react-icons/bs";
 
 export function FlashcardBody() {
   const {
@@ -13,29 +15,44 @@ export function FlashcardBody() {
     setDifficulty,
   } = useStudyFlashcardsContext();
 
+  const { speak } = useSpeechSynthesis();
   return (
     <ModalBody>
       {allFlashcardsStudied && <Text>No more flashcards to study</Text>}
-      <Flex flexDirection="column" gap="18px">
-        <Text>{flashcards[flashcardsCount]?.frontMessage}</Text>
+      {!allFlashcardsStudied && (
+        <Flex flexDirection="column" gap="18px">
+          <Button
+            gap="6px"
+            variant="outline"
+            width="fit-content"
+            onClick={() =>
+              speak({ text: flashcards[flashcardsCount]?.frontMessage })
+            }
+          >
+            <BsFillVolumeUpFill size="20px" />
+          </Button>
+          <Text>{flashcards[flashcardsCount]?.frontMessage}</Text>
 
-        <Button
-          display={isAnswerShowingUp || allFlashcardsStudied ? "none" : "block"}
-          onClick={() => setIsAnswerShowingUp(true)}
-        >
-          show answer
-        </Button>
-        <Text display={isAnswerShowingUp ? "block" : "none"}>
-          {flashcards[flashcardsCount]?.backMessage}
-        </Text>
+          <Button
+            display={
+              isAnswerShowingUp || allFlashcardsStudied ? "none" : "block"
+            }
+            onClick={() => setIsAnswerShowingUp(true)}
+          >
+            show answer
+          </Button>
+          <Text display={isAnswerShowingUp ? "block" : "none"}>
+            {flashcards[flashcardsCount]?.backMessage}
+          </Text>
 
-        {isAnswerShowingUp && (
-          <DifficultyFlashcard
-            setDifficulty={setDifficulty}
-            difficulty={difficulty}
-          />
-        )}
-      </Flex>
+          {isAnswerShowingUp && (
+            <DifficultyFlashcard
+              setDifficulty={setDifficulty}
+              difficulty={difficulty}
+            />
+          )}
+        </Flex>
+      )}
     </ModalBody>
   );
 }
