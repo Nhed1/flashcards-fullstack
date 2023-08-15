@@ -11,8 +11,8 @@ export default function DecksContainer() {
   const { isOpen, onOpen, onClose } = useDisclosure();
 
   return (
-    <VStack mt="10" gap="8">
-      <Button variant="solid" onClick={onOpen}>
+    <VStack mt="10" gap="8" h="100%">
+      <Button variant="outline" colorScheme="purple" onClick={onOpen}>
         add new deck
       </Button>
       <ErrorBoundary fallback={<Error />}>

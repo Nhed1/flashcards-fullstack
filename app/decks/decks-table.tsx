@@ -1,6 +1,6 @@
 "use client";
 
-import { Spinner, Stack, useDisclosure } from "@chakra-ui/react";
+import { Flex, Spinner, Stack, useDisclosure } from "@chakra-ui/react";
 import { useState } from "react";
 import { useGetDecks } from "./hooks/use-get-decks";
 import { DeckInterface } from "./interfaces/deck.interface";
@@ -39,7 +39,7 @@ export default function DecksTable() {
 
   return (
     <>
-      <Stack spacing="4">
+      <Flex gap="4" flexDirection="column" alignItems="center">
         {isLoadingDecks ? (
           <Spinner />
         ) : (
@@ -56,7 +56,7 @@ export default function DecksTable() {
             />
           ))
         )}
-      </Stack>
+      </Flex>
       {modals[modalType]}
     </>
   );

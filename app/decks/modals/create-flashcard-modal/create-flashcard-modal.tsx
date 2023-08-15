@@ -37,7 +37,8 @@ export function CreateFlashcardModal({
       <ModalContent>
         <ModalHeader>
           <Text display="flex" gap="8px">
-            Create card inside <Text color="teal">{deck?.name || ""}</Text>
+            Create flashcard in
+            <Text color="purple.500">{deck?.name || ""}</Text>
           </Text>
         </ModalHeader>
         <ModalCloseButton />
@@ -59,7 +60,7 @@ export function CreateFlashcardModal({
           <Button
             isDisabled={!front || !back}
             loadingText="submitting"
-            colorScheme="teal"
+            colorScheme="purple"
             variant="outline"
             isLoading={status === "loading"}
             onClick={() => {

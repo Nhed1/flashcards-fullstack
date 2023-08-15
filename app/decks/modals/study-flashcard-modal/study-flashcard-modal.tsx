@@ -56,7 +56,8 @@ export function StudyFlashcardModal({
         <ModalContent>
           <ModalHeader>
             <Text display="flex" gap="8px">
-              Study {deck?.name}
+              Study
+              <Text color="purple.500">{deck?.name || ""}</Text>
             </Text>
           </ModalHeader>
           <ModalCloseButton />
