@@ -15,7 +15,7 @@ interface StudyFlashcardsData {
   setIsAnswerShowingUp: (value: boolean) => void;
 
   flashcardsCount: number;
-  handleFlashcardsCount: (value?: number) => void;
+  handleFlashcardsCount: () => void;
 
   setDifficulty: (value: string) => void;
   difficulty: string;
@@ -42,13 +42,10 @@ export function StudyFlashcardsProvider({
   const allFlashcardsStudied =
     flashcardsCount === flashcards?.length || flashcards.length === 0;
 
-  const handleFlashcardsCount = (value?: number) => {
-    if (value === 0) setFlashcardsCount(value);
-    else if (allFlashcardsStudied) return;
-    else setFlashcardsCount((flashcardsCount) => flashcardsCount + 1);
+  const handleFlashcardsCount = () => {
+    if (allFlashcardsStudied) return;
+    setFlashcardsCount((flashcardsCount) => flashcardsCount + 1);
   };
-
-  console.log(flashcardsCount);
 
   const contextValue: StudyFlashcardsData = {
     difficulty,

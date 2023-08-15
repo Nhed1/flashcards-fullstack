@@ -57,7 +57,7 @@ export default function DecksTable() {
           ))
         )}
       </Flex>
-      {modals[modalType]}
+      {isOpen && modals[modalType]}
     </>
   );
 }

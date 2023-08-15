@@ -24,7 +24,11 @@ export default function Deck({
   onOpen: (type: IModalType) => void;
 }) {
   return (
-    <Card w={{ base: "90%", md: "300px", lg: "500px" }} variant="elevated">
+    <Card
+      w={{ base: "90%", md: "300px", lg: "500px" }}
+      variant="elevated"
+      backgroundColor="whiteAlpha.600"
+    >
       <Flex justify="space-between" align="center" px="2">
         <CardHeader>
           <Heading size="md" wordBreak="break-word">
@@ -40,9 +44,7 @@ export default function Deck({
             variant="outline"
           />
           <MenuList>
-            <MenuItem onClick={() => onOpen("studyCard")}>
-              study flashcard
-            </MenuItem>
+            <MenuItem onClick={() => onOpen("studyCard")}>study deck</MenuItem>
             <MenuItem onClick={() => onOpen("addCard")}>
               create flashcard
             </MenuItem>

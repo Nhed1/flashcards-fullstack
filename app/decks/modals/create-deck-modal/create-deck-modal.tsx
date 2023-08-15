@@ -29,6 +29,8 @@ export function CreateDeckModal({ isOpen = false, onClose }: CreateDeckModal) {
     },
   });
 
+  console.log(deckName);
+
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />

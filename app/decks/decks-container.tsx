@@ -18,7 +18,7 @@ export default function DecksContainer() {
       <ErrorBoundary fallback={<Error />}>
         <DecksTable />
       </ErrorBoundary>
-      <CreateDeckModal isOpen={isOpen} onClose={onClose} />
+      {isOpen && <CreateDeckModal isOpen={isOpen} onClose={onClose} />}
     </VStack>
   );
 }

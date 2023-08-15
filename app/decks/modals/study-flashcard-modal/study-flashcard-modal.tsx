@@ -40,16 +40,7 @@ export function StudyFlashcardModal({
 
   const { updateFlashcard, isLoadingFlashcardUpdate } = useUpdateFlashcard();
   return (
-    <Modal
-      size="md"
-      isOpen={isOpen}
-      onClose={() => {
-        handleFlashcardsCount(0);
-        setIsAnswerShowingUp(false);
-        onClose();
-      }}
-      isCentered
-    >
+    <Modal size="md" isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
       {isLoadingFlashcards && <Spinner />}
       {!isLoadingFlashcards && (
