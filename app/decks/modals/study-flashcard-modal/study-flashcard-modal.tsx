@@ -45,8 +45,8 @@ export function StudyFlashcardModal({
       isOpen={isOpen}
       onClose={() => {
         handleFlashcardsCount(0);
-        onClose();
         setIsAnswerShowingUp(false);
+        onClose();
       }}
       isCentered
     >
