@@ -15,7 +15,10 @@ export function FlashcardBody() {
     setDifficulty,
   } = useStudyFlashcardsContext();
 
-  const { speak } = useSpeechSynthesis();
+  const { speak, voices } = useSpeechSynthesis();
+
+  const englishVoice = voices[1];
+
   return (
     <ModalBody>
       {allFlashcardsStudied && <Text>No more flashcards to study</Text>}
@@ -26,7 +29,10 @@ export function FlashcardBody() {
             variant="outline"
             width="fit-content"
             onClick={() =>
-              speak({ text: flashcards[flashcardsCount]?.frontMessage })
+              speak({
+                text: flashcards[flashcardsCount]?.frontMessage,
+                voice: englishVoice,
+              })
             }
           >
             <BsFillVolumeUpFill size="20px" />

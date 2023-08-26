@@ -27,7 +27,6 @@ export const filterFlashcardsByDifficulty = (flashcards: Flashcard[]) => {
     if (flashcard.difficulty === DIFFICULTY.Easy) {
       const flashcardUpdatedAt = dayjs(flashcard.updatedAt);
       if (flashcardUpdatedAt.diff(dayjs(), "day") >= FIVE_DAYS) {
-        console.log(flashcardUpdatedAt.diff(dayjs(), "day") >= FIVE_DAYS);
         return flashcard;
       }
     }
