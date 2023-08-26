@@ -15,7 +15,7 @@ export default function HomeHeader() {
     >
       <Heading size="lg">Flashcards APP</Heading>
 
-      <UserButton showName />
+      <UserButton />
     </Flex>
   );
 }

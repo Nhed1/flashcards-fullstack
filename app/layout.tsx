@@ -15,11 +15,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" style={{ height: "100%" }}>
-      <ClerkProvider
-        appearance={{
-          variables: { colorText: "white" },
-        }}
-      >
+      <ClerkProvider>
         <Providers>
           <body className={inter.className} style={{ height: "100%" }}>
             {children}
