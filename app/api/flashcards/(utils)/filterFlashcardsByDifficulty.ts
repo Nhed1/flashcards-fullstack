@@ -1,11 +1,6 @@
+import { DIFFICULTY } from "../(constants)";
 import { Flashcard } from "../(types)";
 import dayjs from "dayjs";
-
-const DIFFICULTY = {
-  Hard: 3,
-  Normal: 2,
-  Easy: 1,
-};
 
 const FIVE_DAYS = 5;
 

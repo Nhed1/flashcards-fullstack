@@ -1,7 +1,6 @@
 "use client";
 
 import {
-  Button,
   Card,
   CardHeader,
   Flex,
@@ -17,6 +16,7 @@ import { IModalType } from "./decks-table";
 import { HamburgerIcon } from "@chakra-ui/icons";
 import { useDeleteDeck } from "./hooks/use-delete-deck";
 import { useQueryClient } from "@tanstack/react-query";
+import DeckInfo from "./components/deck-info";
 
 export default function Deck({
   deck,
@@ -35,15 +35,20 @@ export default function Deck({
 
   return (
     <Card
+      key={deck.id}
       w={{ base: "90%", md: "300px", lg: "500px" }}
       variant="elevated"
       backgroundColor="whiteAlpha.600"
     >
       <Flex justify="space-between" align="center" px="2">
         <CardHeader>
-          <Heading size="md" wordBreak="break-word">
-            {deck.name}
-          </Heading>
+          <Flex justifyContent="center" alignItems="center" gap="8px">
+            <DeckInfo deck={deck} key={deck.id} />
+
+            <Heading size="md" wordBreak="break-word">
+              {deck.name}
+            </Heading>
+          </Flex>
         </CardHeader>
 
         <Menu>
