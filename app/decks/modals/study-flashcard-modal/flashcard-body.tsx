@@ -1,8 +1,8 @@
 import { Button, Flex, ModalBody, Text } from "@chakra-ui/react";
 import { DifficultyFlashcard } from "./difficulty-flashcard";
 import { useStudyFlashcardsContext } from "./providers/flashcards-provider";
-import { useSpeechSynthesis } from "react-speech-kit";
 import { BsFillVolumeUpFill } from "react-icons/bs";
+import { useSpeakText } from "./hooks/use-speak-text";
 
 export function FlashcardBody() {
   const {
@@ -15,9 +15,7 @@ export function FlashcardBody() {
     setDifficulty,
   } = useStudyFlashcardsContext();
 
-  const { speak, voices } = useSpeechSynthesis();
-
-  const englishVoice = voices[1];
+  const { englishVoice, speakText } = useSpeakText();
 
   return (
     <ModalBody>
@@ -29,10 +27,7 @@ export function FlashcardBody() {
             variant="outline"
             width="fit-content"
             onClick={() =>
-              speak({
-                text: flashcards[flashcardsCount]?.frontMessage,
-                voice: englishVoice,
-              })
+              speakText(flashcards[flashcardsCount]?.frontMessage, englishVoice)
             }
           >
             <BsFillVolumeUpFill size="20px" />
