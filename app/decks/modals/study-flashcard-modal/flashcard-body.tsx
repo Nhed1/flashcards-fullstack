@@ -15,7 +15,7 @@ export function FlashcardBody() {
     setDifficulty,
   } = useStudyFlashcardsContext();
 
-  const { englishVoice, speakText } = useSpeakText();
+  const { speakText } = useSpeakText();
 
   return (
     <ModalBody>
@@ -26,9 +26,7 @@ export function FlashcardBody() {
             gap="6px"
             variant="outline"
             width="fit-content"
-            onClick={() =>
-              speakText(flashcards[flashcardsCount]?.frontMessage, englishVoice)
-            }
+            onClick={() => speakText(flashcards[flashcardsCount]?.frontMessage)}
           >
             <BsFillVolumeUpFill size="20px" />
           </Button>

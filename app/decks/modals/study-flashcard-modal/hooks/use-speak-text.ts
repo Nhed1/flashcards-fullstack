@@ -1,22 +1,22 @@
 export const useSpeakText = () => {
   const synth = window.speechSynthesis;
 
-  const speakText = (text: string, voice: SpeechSynthesisVoice) => {
+  const speakText = (text: string) => {
+    const englishVoice = synth
+      .getVoices()
+      .find((voice) => voice.lang === "en-US") as SpeechSynthesisVoice;
+
     const utterance = new SpeechSynthesisUtterance(text);
 
-    if (voice) {
-      utterance.voice = voice;
+    if (englishVoice) {
+      utterance.voice = englishVoice;
+      synth.speak(utterance);
+    } else {
+      console.error("Voice not found");
     }
-
-    synth.speak(utterance);
   };
-
-  const englishVoice = synth
-    .getVoices()
-    .find((voice) => voice.lang === "en-US") as SpeechSynthesisVoice;
 
   return {
     speakText,
-    englishVoice,
   };
 };
