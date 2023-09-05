@@ -1,4 +1,3 @@
-const ENGLISH_US = "en-US";
 export const useSpeakText = () => {
   const synth = window.speechSynthesis;
 
@@ -14,7 +13,7 @@ export const useSpeakText = () => {
 
   const englishVoice = synth
     .getVoices()
-    .find((voice) => voice.lang === ENGLISH_US) as SpeechSynthesisVoice;
+    .find((voice) => voice.lang === "en-US") as SpeechSynthesisVoice;
 
   return {
     speakText,
