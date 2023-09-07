@@ -1,8 +1,8 @@
 "use client";
 
+import HomeHeader from "@/app/home-header";
 import { Flex } from "@chakra-ui/react";
-import { SignIn } from "@clerk/nextjs";
-import HomeHeader from "./home-header";
+import DecksContainer from "../decks/decks-container";
 
 export default function Home() {
   return (
@@ -15,8 +15,8 @@ export default function Home() {
       backgroundColor="gray.200"
       overflow="hidden"
     >
-      <HomeHeader style={{ position: "absolute" }} />
-      <SignIn />
+      <HomeHeader />
+      <DecksContainer />
     </Flex>
   );
 }

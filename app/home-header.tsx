@@ -1,7 +1,7 @@
 import { Box, Flex, Heading, Text } from "@chakra-ui/react";
 import { UserButton } from "@clerk/nextjs";
 
-export default function HomeHeader() {
+export default function HomeHeader({ style }: { style?: React.CSSProperties }) {
   return (
     <Flex
       position="sticky"
@@ -13,12 +13,13 @@ export default function HomeHeader() {
       backgroundColor="blackAlpha.800"
       textColor="gray.100"
       w="100%"
+      style={style}
     >
       <Box>
         <Heading size="lg">Learnly Cards</Heading>
         <Text fontSize="small">flashcards application to learn English</Text>
       </Box>
-      <UserButton />
+      <UserButton afterSignOutUrl="/" />
     </Flex>
   );
 }

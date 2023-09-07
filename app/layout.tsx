@@ -5,7 +5,7 @@ import { Providers } from "./providers";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-  title: "Flashcards APP",
+  title: "Learnly",
 };
 
 export default function RootLayout({

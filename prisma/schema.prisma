@@ -26,4 +26,6 @@ model Flashcard {
   updatedAt  DateTime? 
   deckId Int
   deck Deck @relation(fields: [deckId], references: [id])
+
+  @@index([deckId])
 }
