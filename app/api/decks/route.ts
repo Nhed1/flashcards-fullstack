@@ -10,7 +10,7 @@ export async function GET(req: NextApiRequestWithFormData) {
   try {
     const decks = await prisma.deck.findMany({ where: { userId } });
 
-    if (!decks || decks.length === 0) {
+    if (!decks) {
       return new Response("Decks not found", { status: 404 });
     }
 

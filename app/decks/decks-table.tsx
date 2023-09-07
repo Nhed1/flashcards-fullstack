@@ -1,6 +1,6 @@
 "use client";
 
-import { Flex, Spinner, Stack, useDisclosure } from "@chakra-ui/react";
+import { Flex, Spinner, Stack, Text, useDisclosure } from "@chakra-ui/react";
 import { useState } from "react";
 import { useGetDecks } from "./hooks/use-get-decks";
 import { DeckInterface } from "./interfaces/deck.interface";
@@ -37,25 +37,28 @@ export default function DecksTable() {
 
   if (isError) throw new Error("decks not found");
 
+  const Decks = () => {
+    if (!decks || decks.length === 0)
+      return <Text>{"You don't have any decks"}</Text>;
+
+    return decks?.map((deck) => (
+      <Deck
+        key={deck.id}
+        deck={deck}
+        onOpen={(type: IModalType) => {
+          setModalType(type);
+
+          onOpen();
+          setDeckOpened(deck);
+        }}
+      />
+    ));
+  };
+
   return (
     <>
       <Flex gap="4" flexDirection="column" alignItems="center">
-        {isLoadingDecks ? (
-          <Spinner />
-        ) : (
-          decks?.map((deck) => (
-            <Deck
-              key={deck.id}
-              deck={deck}
-              onOpen={(type: IModalType) => {
-                setModalType(type);
-
-                onOpen();
-                setDeckOpened(deck);
-              }}
-            />
-          ))
-        )}
+        {isLoadingDecks ? <Spinner /> : <Decks />}
       </Flex>
       {isOpen && modals[modalType]}
     </>
