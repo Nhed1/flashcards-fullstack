@@ -1,6 +1,7 @@
 import {
   Button,
   Input,
+  InputGroup,
   Modal,
   ModalBody,
   ModalCloseButton,
@@ -12,6 +13,7 @@ import {
 import { useState } from "react";
 import { useQueryClient } from "@tanstack/react-query";
 import { useCreateDeck } from "./hooks";
+import { InputLimit } from "@/components/input-limit";
 
 interface CreateDeckModal {
   isOpen: boolean;
@@ -29,8 +31,6 @@ export function CreateDeckModal({ isOpen = false, onClose }: CreateDeckModal) {
     },
   });
 
-  console.log(deckName);
-
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
       <ModalOverlay />
@@ -38,10 +38,12 @@ export function CreateDeckModal({ isOpen = false, onClose }: CreateDeckModal) {
         <ModalHeader>create deck</ModalHeader>
         <ModalCloseButton />
         <ModalBody>
-          <Input
+          <InputLimit
+            value={deckName}
+            limit={30}
             placeholder="deck name"
             onChange={(e) => setDeckName(e.target.value)}
-          ></Input>
+          />
         </ModalBody>
         <ModalFooter>
           <Button
