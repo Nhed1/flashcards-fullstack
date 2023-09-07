@@ -6,9 +6,15 @@ interface Flashcard {
   deckId: number;
 }
 
-export const useCreateFlashcard = () => {
+export const useCreateFlashcard = ({
+  onSuccess,
+  onError,
+}: {
+  onSuccess?: () => void;
+  onError?: () => void;
+}) => {
   const createNewCard = async (flashcard: Flashcard) => {
-    await fetch("/api/flashcards", {
+    return await fetch("/api/flashcards", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
@@ -20,9 +26,12 @@ export const useCreateFlashcard = () => {
   const {
     mutate: createFlashcard,
     status,
+
     ...props
   } = useMutation({
     mutationFn: (flashcard: Flashcard) => createNewCard(flashcard),
+    onSuccess,
+    onError,
   });
 
   return {

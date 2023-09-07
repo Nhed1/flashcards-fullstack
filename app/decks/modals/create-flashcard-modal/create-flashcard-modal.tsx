@@ -11,6 +11,7 @@ import {
   ModalOverlay,
   Text,
   Textarea,
+  useToast,
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useCreateFlashcard } from "./hooks";
@@ -29,7 +30,28 @@ export function CreateFlashcardModal({
   const [front, setFront] = useState("");
   const [back, setBack] = useState("");
 
-  const { createFlashcard, status } = useCreateFlashcard();
+  const toast = useToast();
+
+  const { createFlashcard, status } = useCreateFlashcard({
+    onSuccess: () => {
+      toast({
+        position: "top-right",
+        title: "Flashcard created !",
+        status: "success",
+        duration: 3000,
+        isClosable: true,
+      });
+    },
+    onError: () => {
+      toast({
+        position: "top-right",
+        title: "Something went wrong !",
+        status: "error",
+        duration: 3000,
+        isClosable: true,
+      });
+    },
+  });
 
   return (
     <Modal isOpen={isOpen} onClose={onClose} isCentered>
