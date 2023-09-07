@@ -14,8 +14,7 @@ import {
 import { DeckInterface } from "./interfaces/deck.interface";
 import { IModalType } from "./decks-table";
 import { HamburgerIcon } from "@chakra-ui/icons";
-import { useDeleteDeck } from "./hooks/use-delete-deck";
-import { useQueryClient } from "@tanstack/react-query";
+
 import DeckInfo from "./components/deck-info";
 
 export default function Deck({
@@ -25,14 +24,6 @@ export default function Deck({
   deck: DeckInterface;
   onOpen: (type: IModalType) => void;
 }) {
-  const queryClient = useQueryClient();
-
-  const { deleteDeck } = useDeleteDeck({
-    onSuccess: () => {
-      queryClient.invalidateQueries(["get-decks"]);
-    },
-  });
-
   return (
     <Card
       key={deck.id}
@@ -63,7 +54,7 @@ export default function Deck({
             <MenuItem onClick={() => onOpen("addCard")}>
               create flashcard
             </MenuItem>
-            <MenuItem onClick={() => deleteDeck({ id: String(deck.id) })}>
+            <MenuItem onClick={() => onOpen("deleteDeck")}>
               delete deck
             </MenuItem>
           </MenuList>
