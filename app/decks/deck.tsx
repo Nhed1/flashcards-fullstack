@@ -16,6 +16,8 @@ import { IModalType } from "./decks-table";
 import { HamburgerIcon } from "@chakra-ui/icons";
 
 import DeckInfo from "./components/deck-info";
+import { BiSolidBookAlt } from "react-icons/bi";
+import FlashcardsToLearnCounter from "./components/flashcards-to-learn-counter";
 
 export default function Deck({
   deck,
@@ -34,8 +36,10 @@ export default function Deck({
       <Flex justify="space-between" align="center" px="2">
         <CardHeader>
           <Flex justifyContent="center" alignItems="center" gap="8px">
-            <DeckInfo deck={deck} key={deck.id} />
-
+            <Flex alignSelf="flex-end" gap="6px">
+              <DeckInfo deck={deck} key={deck.id} />
+              <FlashcardsToLearnCounter deck={deck} key={deck.id} />
+            </Flex>
             <Heading size="md" wordBreak="break-word">
               {deck.name}
             </Heading>

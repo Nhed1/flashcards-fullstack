@@ -17,9 +17,9 @@ export default function DeckInfo({ deck }: { deck: DeckInterface }) {
               <Spinner />
             ) : (
               <>
-                <Text>easy: {flashcardsCounter?.flashcardsEasy}</Text>
-                <Text>normal: {flashcardsCounter?.flashcardsNormal}</Text>
-                <Text>hard: {flashcardsCounter?.flashcardsHard}</Text>
+                <Text>Easy: {flashcardsCounter?.flashcardsEasy}</Text>
+                <Text>Normal: {flashcardsCounter?.flashcardsNormal}</Text>
+                <Text>Hard: {flashcardsCounter?.flashcardsHard}</Text>
               </>
             )}
           </>
