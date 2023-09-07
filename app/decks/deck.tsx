@@ -36,7 +36,7 @@ export default function Deck({
   return (
     <Card
       key={deck.id}
-      w={{ base: "90%", md: "300px", lg: "500px" }}
+      w={{ base: "100%", md: "500px", lg: "600px" }}
       variant="elevated"
       backgroundColor="whiteAlpha.600"
     >
