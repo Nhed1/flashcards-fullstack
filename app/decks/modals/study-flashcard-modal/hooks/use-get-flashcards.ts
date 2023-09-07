@@ -25,7 +25,7 @@ export const useGetFlashcards = (deck: DeckInterface | null) => {
     isLoading: isLoadingFlashcards,
     isError,
   } = useQuery<Flashcard[]>({
-    queryKey: ["get-flashcards"],
+    queryKey: ["get-flashcards", deck?.id],
     queryFn: handleFlashcards,
   });
 
