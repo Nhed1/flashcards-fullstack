@@ -16,6 +16,7 @@ import {
 import { useState } from "react";
 import { useCreateFlashcard } from "./hooks";
 import { TextEditor } from "@/components/text-editor";
+import { WordsTagsToLearn } from "../../components/words-tags-to-learn";
 
 interface CreateCardModal {
   isOpen: boolean;
@@ -74,19 +75,7 @@ export function CreateFlashcardModal({
               onChange={(value) => setFront(value)}
               setBoldTexts={setSelectedFrontTexts}
             />
-            <Flex gap="8px" wrap="wrap">
-              <Text as="b">words to learn:</Text>
-              {selectedFrontTexts.map((tag) => (
-                <Tag
-                  variant="outline"
-                  colorScheme="purple"
-                  key={tag}
-                  width="fit-content"
-                >
-                  {tag}
-                </Tag>
-              ))}
-            </Flex>
+            <WordsTagsToLearn selectedFrontTexts={selectedFrontTexts} />
             <TextEditor
               isBoldShowing={false}
               value={back}

@@ -3,6 +3,8 @@ import { DifficultyFlashcard } from "./difficulty-flashcard";
 import { useStudyFlashcardsContext } from "./providers/flashcards-provider";
 import { BsFillVolumeUpFill } from "react-icons/bs";
 import { useSpeakText } from "./hooks/use-speak-text";
+import { getBoldTextHtml } from "@/app/utils/getBoldTextHtml";
+import { WordsTagsToLearn } from "../../components/words-tags-to-learn";
 
 export function FlashcardBody() {
   const {
@@ -17,6 +19,8 @@ export function FlashcardBody() {
 
   const { speakText } = useSpeakText();
 
+  const tags = getBoldTextHtml(flashcards[flashcardsCount]?.frontMessage);
+
   return (
     <ModalBody>
       {allFlashcardsStudied && <Text>No more flashcards to study</Text>}
@@ -30,7 +34,13 @@ export function FlashcardBody() {
           >
             <BsFillVolumeUpFill size="20px" />
           </Button>
-          <Text>{flashcards[flashcardsCount]?.frontMessage}</Text>
+          <Text
+            dangerouslySetInnerHTML={{
+              __html: flashcards[flashcardsCount]?.frontMessage,
+            }}
+          />
+
+          <WordsTagsToLearn selectedFrontTexts={tags} />
 
           <Button
             display={
@@ -40,9 +50,12 @@ export function FlashcardBody() {
           >
             show answer
           </Button>
-          <Text display={isAnswerShowingUp ? "block" : "none"}>
-            {flashcards[flashcardsCount]?.backMessage}
-          </Text>
+          <Text
+            display={isAnswerShowingUp ? "block" : "none"}
+            dangerouslySetInnerHTML={{
+              __html: flashcards[flashcardsCount]?.backMessage,
+            }}
+          />
 
           {isAnswerShowingUp && (
             <DifficultyFlashcard

@@ -6,6 +6,7 @@ import StarterKit from "@tiptap/starter-kit";
 import Placeholder from "@tiptap/extension-placeholder";
 import React, { useEffect, useState } from "react";
 import { BsTypeBold } from "react-icons/bs";
+import { getBoldTextHtml } from "@/app/utils/getBoldTextHtml";
 
 interface TextEditor {
   value: string;
@@ -22,17 +23,6 @@ export const TextEditor = ({
   isBoldShowing = true,
   setBoldTexts,
 }: TextEditor) => {
-  function findBoldText(htmlString: string) {
-    const strongTagRegex = /<strong>(.*?)<\/strong>/g;
-    const textArray: string[] = [];
-    let match;
-    while ((match = strongTagRegex.exec(htmlString)) !== null) {
-      textArray.push(match[1].trim());
-    }
-
-    return textArray;
-  }
-
   const editor = useEditor({
     content: value,
     onUpdate({ editor }) {
@@ -41,7 +31,7 @@ export const TextEditor = ({
       onChange(html);
 
       if (setBoldTexts) {
-        const boldTexts = findBoldText(editor.getHTML());
+        const boldTexts = getBoldTextHtml(editor.getHTML());
 
         setBoldTexts(boldTexts);
       }
