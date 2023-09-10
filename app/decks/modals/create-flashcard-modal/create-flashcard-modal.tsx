@@ -13,7 +13,7 @@ import {
   Textarea,
   useToast,
 } from "@chakra-ui/react";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { useCreateFlashcard } from "./hooks";
 import { TextEditor } from "@/components/text-editor";
 
@@ -30,6 +30,7 @@ export function CreateFlashcardModal({
 }: CreateCardModal) {
   const [front, setFront] = useState("");
   const [back, setBack] = useState("");
+  const [selectedFrontTexts, setSelectedFrontTexts] = useState<string[]>([]);
 
   const toast = useToast();
 
@@ -71,6 +72,7 @@ export function CreateFlashcardModal({
               value={front}
               placeholder="front of the flashcard"
               onChange={(value) => setFront(value)}
+              setBoldTexts={setSelectedFrontTexts}
             />
 
             <TextEditor

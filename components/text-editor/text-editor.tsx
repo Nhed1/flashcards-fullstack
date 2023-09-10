@@ -1,10 +1,10 @@
 import { Button, Flex } from "@chakra-ui/react";
 import "./style.css";
 
-import { EditorContent, useEditor } from "@tiptap/react";
+import { Editor, EditorContent, Node, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
 import Placeholder from "@tiptap/extension-placeholder";
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { BsTypeBold } from "react-icons/bs";
 
 interface TextEditor {
@@ -12,6 +12,7 @@ interface TextEditor {
   onChange: (value: string) => void;
   placeholder?: string;
   isBoldShowing?: boolean;
+  setBoldTexts?: (value: string[]) => void;
 }
 
 export const TextEditor = ({
@@ -19,17 +20,31 @@ export const TextEditor = ({
   onChange = () => {},
   placeholder,
   isBoldShowing = true,
+  setBoldTexts,
 }: TextEditor) => {
-  Placeholder.configure({
-    emptyNodeClass: "my-custom-is-empty-class",
-    placeholder: placeholder,
-  });
+  function findBoldText(htmlString: string) {
+    const strongTagRegex = /<strong>(.*?)<\/strong>/g;
+    const textArray: string[] = [];
+    let match;
+    while ((match = strongTagRegex.exec(htmlString)) !== null) {
+      textArray.push(match[1].trim());
+    }
+
+    return textArray;
+  }
 
   const editor = useEditor({
+    content: value,
     onUpdate({ editor }) {
-      const text = editor?.getHTML();
+      const html = editor.getHTML();
 
-      onChange(text);
+      onChange(html);
+
+      if (setBoldTexts) {
+        const boldTexts = findBoldText(editor.getHTML());
+
+        setBoldTexts(boldTexts);
+      }
     },
     extensions: [
       StarterKit,
