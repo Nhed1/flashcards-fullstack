@@ -15,6 +15,7 @@ import {
 } from "@chakra-ui/react";
 import { useState } from "react";
 import { useCreateFlashcard } from "./hooks";
+import { TextEditor } from "@/components/text-editor";
 
 interface CreateCardModal {
   isOpen: boolean;
@@ -66,6 +67,7 @@ export function CreateFlashcardModal({
         <ModalCloseButton />
         <ModalBody>
           <Flex flexDirection="column" gap="18px">
+            <TextEditor />
             <Textarea
               value={front}
               placeholder="front card"
