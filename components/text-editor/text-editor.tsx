@@ -1,19 +1,42 @@
-import { Button, Container, Flex, Icon } from "@chakra-ui/react";
+import { Button, Flex } from "@chakra-ui/react";
 import "./style.css";
 
-import {
-  BubbleMenu,
-  EditorContent,
-  FloatingMenu,
-  useEditor,
-} from "@tiptap/react";
+import { EditorContent, useEditor } from "@tiptap/react";
 import StarterKit from "@tiptap/starter-kit";
-import React, { useRef } from "react";
+import Placeholder from "@tiptap/extension-placeholder";
+import React from "react";
 import { BsTypeBold } from "react-icons/bs";
 
-export const TextEditor = () => {
+interface TextEditor {
+  value: string;
+  onChange: (value: string) => void;
+  placeholder?: string;
+  isBoldShowing?: boolean;
+}
+
+export const TextEditor = ({
+  value,
+  onChange = () => {},
+  placeholder,
+  isBoldShowing = true,
+}: TextEditor) => {
+  Placeholder.configure({
+    emptyNodeClass: "my-custom-is-empty-class",
+    placeholder: placeholder,
+  });
+
   const editor = useEditor({
-    extensions: [StarterKit],
+    onUpdate({ editor }) {
+      const text = editor?.getHTML();
+
+      onChange(text);
+    },
+    extensions: [
+      StarterKit,
+      Placeholder.configure({
+        placeholder: placeholder,
+      }),
+    ],
   });
 
   const handleEditorClick = () => {
@@ -22,7 +45,7 @@ export const TextEditor = () => {
 
   return (
     <>
-      {editor && (
+      {editor && isBoldShowing && (
         <Flex>
           <Button
             onClick={() => editor.chain().focus().toggleBold().run()}
@@ -35,6 +58,7 @@ export const TextEditor = () => {
 
       <div onClick={handleEditorClick} style={{ cursor: "text" }}>
         <EditorContent
+          value={value}
           editor={editor}
           style={{
             padding: "8px",

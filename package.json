@@ -20,6 +20,7 @@
     "@emotion/styled": "^11.11.0",
     "@prisma/client": "^5.2.0",
     "@tanstack/react-query": "^4.29.19",
+    "@tiptap/extension-placeholder": "^2.1.8",
     "@tiptap/pm": "^2.1.8",
     "@tiptap/react": "^2.1.8",
     "@tiptap/starter-kit": "^2.1.8",

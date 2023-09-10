@@ -67,22 +67,25 @@ export function CreateFlashcardModal({
         <ModalCloseButton />
         <ModalBody>
           <Flex flexDirection="column" gap="18px">
-            <TextEditor />
-            <Textarea
+            <TextEditor
               value={front}
-              placeholder="front card"
-              onChange={(e) => setFront(e.target.value)}
+              placeholder="front of the flashcard"
+              onChange={(value) => setFront(value)}
             />
-            <Textarea
+
+            <TextEditor
+              isBoldShowing={false}
               value={back}
-              placeholder="back card"
-              onChange={(e) => setBack(e.target.value)}
+              placeholder="back of the flashcard"
+              onChange={(value) => setBack(value)}
             />
           </Flex>
         </ModalBody>
         <ModalFooter>
           <Button
-            isDisabled={!front || !back}
+            isDisabled={
+              !front || front === "<p></p>" || !back || back === "<p></p>"
+            }
             loadingText="submitting"
             colorScheme="purple"
             variant="outline"
