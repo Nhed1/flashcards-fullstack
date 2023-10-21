@@ -70,6 +70,8 @@ export function CreateFlashcardModal({
         <ModalBody>
           <Flex flexDirection="column" gap="18px">
             <TextEditor
+              dependencyValue={status}
+              key={1}
               value={front}
               placeholder="front of the flashcard"
               onChange={(value) => setFront(value)}
@@ -77,6 +79,8 @@ export function CreateFlashcardModal({
             />
             <WordsTagsToLearn selectedFrontTexts={selectedFrontTexts} />
             <TextEditor
+              dependencyValue={status}
+              key={2}
               isBoldShowing={false}
               value={back}
               placeholder="back of the flashcard"

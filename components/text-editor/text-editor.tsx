@@ -9,6 +9,8 @@ import { BsTypeBold } from "react-icons/bs";
 import { getBoldTextHtml } from "@/app/utils/getBoldTextHtml";
 
 interface TextEditor {
+  dependencyValue?: string;
+  key?: number;
   value: string;
   onChange: (value: string) => void;
   placeholder?: string;
@@ -17,32 +19,37 @@ interface TextEditor {
 }
 
 export const TextEditor = ({
+  key,
+  dependencyValue,
   value,
   onChange = () => {},
   placeholder,
   isBoldShowing = true,
   setBoldTexts,
 }: TextEditor) => {
-  const editor = useEditor({
-    content: value,
-    onUpdate({ editor }) {
-      const html = editor.getHTML();
+  const editor = useEditor(
+    {
+      content: value,
+      onUpdate({ editor }) {
+        const html = editor.getHTML();
 
-      onChange(html);
+        onChange(html);
 
-      if (setBoldTexts) {
-        const boldTexts = getBoldTextHtml(editor.getHTML());
+        if (setBoldTexts) {
+          const boldTexts = getBoldTextHtml(editor.getHTML());
 
-        setBoldTexts(boldTexts);
-      }
+          setBoldTexts(boldTexts);
+        }
+      },
+      extensions: [
+        StarterKit,
+        Placeholder.configure({
+          placeholder: placeholder,
+        }),
+      ],
     },
-    extensions: [
-      StarterKit,
-      Placeholder.configure({
-        placeholder: placeholder,
-      }),
-    ],
-  });
+    [dependencyValue]
+  );
 
   const handleEditorClick = () => {
     if (editor) editor.commands.focus();
@@ -63,6 +70,7 @@ export const TextEditor = ({
 
       <div onClick={handleEditorClick} style={{ cursor: "text" }}>
         <EditorContent
+          key={key}
           value={value}
           editor={editor}
           style={{
