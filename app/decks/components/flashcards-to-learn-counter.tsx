@@ -22,11 +22,11 @@ export default function FlashcardsToLearnCounter({
     if (flashcardsCounter > 0)
       return {
         text: `Flashcards to learn: ${flashcardsCounter}`,
-        component: <BiSolidBookAlt size="14px" />,
+        component: <BiSolidBookAlt size="14px" color="purple" />,
       };
     return {
       text: "No flashcards to learn",
-      component: <BsFillCheckCircleFill size="14px" />,
+      component: <BsFillCheckCircleFill size="14px" color="green" />,
     };
   };
 
