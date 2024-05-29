@@ -7,8 +7,6 @@ export async function DELETE(
 ) {
   const id = Number(params.id);
 
-  console.log(id);
-
   try {
     const deleteFlashcards = prisma.flashcard.deleteMany({
       where: {
